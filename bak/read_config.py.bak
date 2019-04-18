@@ -1,0 +1,17 @@
+#!/usr/bin/python
+import configparser
+
+def read_ini(config_name,config_option):
+    cf = configparser.ConfigParser()
+    cf.read(config_name)
+
+    secs = cf.sections()
+    #print (secs)
+
+    items = cf.items(config_option)
+    
+    options = cf.options(config_option)    
+    #print (items)
+
+if __name__ == '__main__':
+   read_ini("mysqlinfo.config","mysql")
