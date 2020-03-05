@@ -1,6 +1,5 @@
 #!/usr/bin/python
 import pymysql.cursors
-import os
 from read_config import ReadConfig
 
 class HandleMysql:
@@ -35,26 +34,8 @@ class HandleMysql:
         self.cur.close()
         self.conn.close()
 if __name__ == '__main__':
-    os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.ZHS16GBK' 
-    splitTag = '|'
-    fileCode = 'utf-8'
-    localPath = './'
-    fileName = 'aoliver_complain.csv'
-    filePath = os.path.join(localPath,fileName)
-    file = open(filePath,'w',encoding='utf-8') 
     hm = HandleMysql()
     sql = "select * from dw_user"
-    tableResult = hm.search(sql)
-    for row in tableResult:
-        rowdata = ''
-        for column in row :
-            if column == None:
-                column =''        
-            try:        
-                #rowdata = rowdata + (str(column)).encode(fileCode).decode('gbk').replace('\n', '') + splitTag
-                rowdata = rowdata + str(column).replace('\n', '') + splitTag
-            except Exception as e:
-                print(e)
-        file.write(rowdata[:-1]+'\n')
-    file.close()
+    for i in hm.search(sql):
+        print(i)
     hm.dispose()

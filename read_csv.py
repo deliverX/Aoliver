@@ -56,7 +56,8 @@ def main():
     conn = get_conn()
     userList = read_csv(sys.argv[1])
     print(userList)
-    insert_many(conn,userList)
+    print(read_csv.__name__)
+    #insert_many(conn,userList)
     conn.close()
 
 if __name__ == '__main__':
